@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const gameRoutes = require('./routes/gameRoutes');
 
 // Cargar variables de entorno desde .env
 dotenv.config();
@@ -27,6 +28,9 @@ const connectDB = async () => {
 
 // Llamar a la función de conexión
 connectDB();
+
+// Usar las rutas de juegos
+app.use('/api', gameRoutes);
 
 // Rutas básicas (por ahora podemos dejarlo vacío o agregar un endpoint de prueba)
 app.get('/', (req, res) => {
