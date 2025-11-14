@@ -1,18 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const Game = require('../models/game'); // Importa el modelo de juego
+const Game = require('../models/Game'); // Importa el modelo de juego
 
 // Ruta para agregar un nuevo juego (POST)
-router.post('/games', async (req, res) => {
-  const { name, genre, platform, hoursPlayed } = req.body; // Obtener los datos del cuerpo de la solicitud
+router.post('/', async (req, res) => {
+  const { titulo, genero, plataforma, añoLanzamiento, desarrollador, imagenPortada, descripcion, completado } = req.body;
 
   try {
     // Crear un nuevo juego
     const newGame = new Game({
-      name,
-      genre,
-      platform,
-      hoursPlayed,
+      titulo,
+      genero,
+      plataforma,
+      añoLanzamiento,
+      desarrollador,
+      imagenPortada,
+      descripcion,
+      completado
     });
 
     // Guardar el juego en la base de datos
@@ -27,7 +31,7 @@ router.post('/games', async (req, res) => {
 });
 
 // Ruta para obtener todos los juegos (GET)
-router.get('/games', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const games = await Game.find(); // Obtiene todos los juegos de la base de datos
     res.json(games); // Envía la lista de juegos en formato JSON

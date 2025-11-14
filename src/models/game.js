@@ -1,22 +1,44 @@
+// src/models/Game.js
 const mongoose = require('mongoose');
 
 const gameSchema = new mongoose.Schema({
-  name: {
+  titulo: {
     type: String,
     required: true,
+    trim: true
   },
-  genre: {
+  genero: {
     type: String,
-    required: true,
+    required: true
   },
-  platform: {
+  plataforma: {
     type: String,
-    required: true,
+    required: true
   },
-  hoursPlayed: {
+  añoLanzamiento: {
     type: Number,
-    default: 0,
+    required: true
   },
+  desarrollador: {
+    type: String,
+    required: true
+  },
+  imagenPortada: {
+    type: String, // URL de la imagen
+    required: true
+  },
+  descripcion: {
+    type: String,
+    trim: true
+  },
+  completado: {
+    type: Boolean,
+    default: false // Se asume que no está completado por defecto
+  },
+  fechaCreacion: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 module.exports = mongoose.model('Game', gameSchema);

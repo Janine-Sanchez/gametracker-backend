@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const gameRoutes = require('./routes/gameRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 
 // Cargar variables de entorno desde .env
 dotenv.config();
@@ -12,6 +14,12 @@ dotenv.config();
 const app = express();
 app.use(express.json());  // Middleware para parsear el cuerpo de las peticiones como JSON
 app.use(cors());
+
+// Registrar las rutas de usuarios y juegos
+app.use('/api/users', userRoutes);
+app.use('/api/games', gameRoutes); 
+
+
 // Conectar a MongoDB
 const connectDB = async () => {
     try {
@@ -30,9 +38,6 @@ const connectDB = async () => {
 // Llamar a la función de conexión
 connectDB();
 
-// Usar las rutas de juegos
-app.use('/api', gameRoutes);
-
 // Rutas básicas (por ahora podemos dejarlo vacío o agregar un endpoint de prueba)
 app.get('/', (req, res) => {
     res.send('¡Servidor funcionando!');
@@ -43,3 +48,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+
+
+
