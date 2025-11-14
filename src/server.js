@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const gameRoutes = require('./routes/gameRoutes');
 const userRoutes = require('./routes/userRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 
 // Cargar variables de entorno desde .env
@@ -18,6 +19,7 @@ app.use(cors());
 // Registrar las rutas de usuarios y juegos
 app.use('/api/users', userRoutes);
 app.use('/api/games', gameRoutes); 
+app.use('/api/reviews', reviewRoutes); // Rutas de reseñas
 
 
 // Conectar a MongoDB
