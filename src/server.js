@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const gameRoutes = require('./routes/gameRoutes');
 
 // Cargar variables de entorno desde .env
@@ -10,7 +11,7 @@ dotenv.config();
 // Crear la aplicación de Express
 const app = express();
 app.use(express.json());  // Middleware para parsear el cuerpo de las peticiones como JSON
-
+app.use(cors());
 // Conectar a MongoDB
 const connectDB = async () => {
     try {
