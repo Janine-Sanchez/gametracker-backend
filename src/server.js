@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const gameRoutes = require('./routes/gameRoutes');
-const userRoutes = require('./routes/userRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 
 
@@ -16,8 +15,7 @@ const app = express();
 app.use(express.json());  // Middleware para parsear el cuerpo de las peticiones como JSON
 app.use(cors());
 
-// Registrar las rutas de usuarios y juegos
-app.use('/api/users', userRoutes);
+// Registrar las rutas de juegos y reseñas
 app.use('/api/games', gameRoutes); 
 app.use('/api/reviews', reviewRoutes); // Rutas de reseñas
 
