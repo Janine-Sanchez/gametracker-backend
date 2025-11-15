@@ -10,10 +10,11 @@ exports.getAllReviews = async (req, res) => {
     }
 };
 
-// 2. GET /api/reseñas/juego/:juegoId - Reseñas de un juego específico
+// 2. GET /api/reseñas/juego/:gameId - Reseñas de un juego específico
 exports.getReviewsByGameId = async (req, res) => {
     try {
-        const reviews = await Review.find({ juegoId: req.params.juegoId }).populate('juegoId');
+        // Buscar reseñas para el juego específico usando gameId (solo el _id del juego)
+        const reviews = await Review.find({ juegoId: req.params.gameId }).populate('juegoId');
         if (reviews.length === 0) {
             return res.status(404).json({ message: 'No se encontraron reseñas para este juego.' });
         }
@@ -25,15 +26,28 @@ exports.getReviewsByGameId = async (req, res) => {
 
 // 3. POST /api/reseñas - Escribir nueva reseña
 exports.createReview = async (req, res) => {
-    // req.body debe contener los datos como juegoId, puntuacion, textoReseña, etc.
-    const newReview = new Review(req.body);
+    const { juegoId, puntuacion, textoReseña, horasJugadas, dificultad, recomendaria } = req.body;
+
+    // Validar que juegoId sea un ObjectId válido
+    if (!mongoose.Types.ObjectId.isValid(juegoId)) {
+        return res.status(400).json({ message: 'El juegoId no es válido' });
+    }
+
+    // Crear una nueva reseña con los datos recibidos
+    const newReview = new Review({
+        juegoId,         // Asegúrate de que juegoId sea solo el ObjectId del juego
+        puntuacion,
+        textoReseña,
+        horasJugadas,
+        dificultad,
+        recomendaria
+    });
 
     try {
         const savedReview = await newReview.save();
-        res.status(201).json(savedReview);
+        res.status(201).json(savedReview); // Enviar la nueva reseña creada
     } catch (error) {
-        // Mongoose maneja errores de validación (required: true, min/max, etc.)
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error.message }); // Mongoose maneja errores de validación
     }
 };
 
