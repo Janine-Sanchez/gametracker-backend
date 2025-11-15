@@ -1,4 +1,3 @@
-// Importando las dependencias necesarias
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -17,8 +16,7 @@ app.use(cors());
 
 // Registrar las rutas de juegos y reseñas
 app.use('/api/games', gameRoutes); 
-app.use('/api/reviews', reviewRoutes); // Rutas de reseñas
-
+app.use('/api/reviews', reviewRoutes); 
 
 // Conectar a MongoDB
 const connectDB = async () => {
@@ -38,7 +36,7 @@ const connectDB = async () => {
 // Llamar a la función de conexión
 connectDB();
 
-// Rutas básicas (por ahora podemos dejarlo vacío o agregar un endpoint de prueba)
+// Rutas básicas
 app.get('/', (req, res) => {
     res.send('¡Servidor funcionando!');
 });

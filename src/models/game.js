@@ -1,4 +1,3 @@
-// src/models/Game.js
 const mongoose = require('mongoose');
 
 const gameSchema = new mongoose.Schema({
@@ -33,7 +32,7 @@ const gameSchema = new mongoose.Schema({
   },
   completado: {
     type: Boolean,
-    default: false // Se asume que no está completado por defecto
+    default: false 
   },
   fechaCreacion: {
     type: Date,

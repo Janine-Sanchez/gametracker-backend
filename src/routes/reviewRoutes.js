@@ -3,7 +3,7 @@ const router = express.Router();
 const reviewController = require('../controllers/reviewController');
 
 // Rutas específicas para obtener reseñas de un juego
-router.get('/games/:gameId/reviews', reviewController.getReviewsByGameId); // GET /api/reseñas/juego/:gameId
+router.get('/games/:gameId/reviews', reviewController.getReviewsByGameId);
 
 // Rutas base para Reseñas
 router.get('/', reviewController.getAllReviews); // GET /api/reseñas
